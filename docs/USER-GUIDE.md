@@ -32,6 +32,7 @@ and every hollow is where it is not.*
 > checks fail. All 17 controls are shown to change the picture. It has **never been loaded into
 > Resolume on macOS** — the one host it has run in is the fleet's own test host, `oxbow`, for
 > 120 frames.
+> On Windows, in Resolume Arena 7.27.1 (win-lab, Mesa llvmpipe, no GPU, 2026-09-24): a build of v0.1.0 loads from Extra Effects, registers as `SW Toner` / `TO01` / effect, all 23 host controls match the declaration, it renders and Arena's log stays clean: 9 of the fleet gate's 9 checks, with all 18 controls moving the picture (four under a precondition: Screen and Screen Angle in Photo Mode, Circumference with Drum Marks up, Direction with Toner Supply down). Software rendering says nothing about a GPU or about speed.
 > Try it on a spare layer before you put it in a show.
 >
 > This codebase was created with AI assistance, directed and reviewed by a human author.
@@ -311,8 +312,8 @@ buffer that could not be allocated.
 ## Known limits
 
 - **Never loaded into Resolume on macOS**, and nothing has driven the controls in a host there.
-  How the seventeen controls read in the inspector and whether eight generations at 1080p leave
-  the composition room for anything else are untested.
+  Whether eight generations at 1080p leave the composition room for anything else is untested.
+  On Windows, see the note at the top of this guide.
 - **The field is a separable product of strip closed forms**, not the radial field of a point
   charge. It is exact for infinite strips and at the centre of any rectangle; off-axis near a
   small mark its shape differs from the radial one, and at a larger gap it once put a ring of
@@ -334,6 +335,9 @@ buffer that could not be allocated.
 - **Not verified at 4K**, only benchmarked there.
 - **Only ever run on an Apple M4 Max**, although the macOS build contains an Intel slice.
 - **No presets, no audio input** and no OpenFX version.
+- **There is a browser demo** at [toner-demo.stoatworks-labs.com](https://toner-demo.stoatworks-labs.com).
+  It runs the plugin's own shaders in WebGL2 over a hand port of the per-frame coefficients; it is
+  a port to a web page, not the plugin, and the page lists what it does not reproduce.
 
 ---
 
