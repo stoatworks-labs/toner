@@ -24,7 +24,9 @@ rules and text-like marks, and a moving bar. `totest --out` renders it.
 
 **Some controls need another to mean anything.** Screen and Screen Angle
 only exist in Photo Mode; Circumference only moves the drum's marks when
-there are any; Recovery only matters while the developer is depleting.
+there are any; Recovery only matters while the developer is depleting. And
+Screen Angle's two ends are the same lattice (a square lattice has a
+quarter-turn symmetry), so it is compared at 0 and 45 degrees.
 CONTEXT says what else has to be true for each, and uses nothing but the
 plugin's own parameters.
 
@@ -58,7 +60,9 @@ FRAMES = 40
 #   _low/_high  the two positions to compare, when not the range's ends
 CONTEXT = {
     "Screen": {"Photo Mode": 1},
-    "Screen Angle": {"Photo Mode": 1},
+    # A square dot lattice is the same lattice half a turn on, so the range's
+    # two ends (0 and 180 degrees) are the same picture: compare 0 with 45.
+    "Screen Angle": {"Photo Mode": 1, "_high": 0.25},
     "Circumference": {"Drum Marks": 1},
     "Recovery": {"Toner Supply": 0.2},
 }

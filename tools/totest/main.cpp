@@ -1589,7 +1589,7 @@ int runBench( const std::vector< std::string >& settings, int frames )
 		std::printf( "%s    %7.2f  %7.2f  %7.2f                 %5.1f%%  %5.1f%%  %5.1f%%\n", size.name, ms[ 0 ], ms[ 1 ], ms[ 2 ],
 		             ms[ 0 ] / 16.667 * 100.0, ms[ 1 ] / 16.667 * 100.0, ms[ 2 ] / 16.667 * 100.0 );
 	}
-	std::printf( "\nEach generation: eleven passes, of which the two 49-tap field passes are most of the cost.\n" );
+	std::printf( "\nEach generation: eleven passes, of which the two 33-tap field passes are most of the cost.\n" );
 	return 0;
 }
 
