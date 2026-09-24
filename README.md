@@ -29,6 +29,16 @@ Resolume. Four generations, Solid Fill 0.3, Toner Supply 0.55, Drum Marks 0.6.
 Nothing here is drawn as an outline: every rim is where the fringe field of a
 charged area is strong enough to develop, and every hollow is where it is not.</sub>
 
+[![Toner — a photocopier, and a copy of a copy of a copy, for Resolume](docs/video-thumb.png)](https://www.youtube.com/watch?v=-Ap1IHOWKJw)
+
+*[Watch it](https://www.youtube.com/watch?v=-Ap1IHOWKJw) — 53 seconds:
+one, three and eight generations collapsing the greys, Solid Fill hollowing every solid to a
+rim and then holding it, Toner Supply running the page out part-way and Direction turning it
+round, eight skewed and zoomed copies drifting, Photo Mode's screen beating against itself,
+drum marks repeating down the page, four paper stocks, and Contrast, Optics and Mix back to
+the clip. Rendered by the plugin's own harness over Resolume's bundled demo clips, not
+captured from Resolume.*
+
 ## The one idea
 
 A photocopier is a xerographic engine, and each stage leaves its mark: optics
