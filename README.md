@@ -39,6 +39,38 @@ drum marks repeating down the page, four paper stocks, and Contrast, Optics and 
 the clip. Rendered by the plugin's own harness over Resolume's bundled demo clips, not
 captured from Resolume.*
 
+<!-- downloads:start -->
+
+## Download
+
+**[v0.1.0](https://github.com/stoatworks-labs/toner/releases/tag/v0.1.0)** — prebuilt for macOS and Windows. Pick your platform:
+
+<details>
+<summary><b>macOS</b> — Universal (Apple Silicon + Intel)</summary>
+
+| Build | Download | Size |
+| --- | --- | --- |
+| Universal (Apple Silicon + Intel) · .dmg disk image | [`toner-0.1.0-macos-universal.dmg`](https://github.com/stoatworks-labs/toner/releases/download/v0.1.0/toner-0.1.0-macos-universal.dmg) | 210 KB |
+| Universal (Apple Silicon + Intel) · .zip archive | [`toner-macos-universal.zip`](https://github.com/stoatworks-labs/toner/releases/latest/download/toner-macos-universal.zip) | 172 KB |
+
+</details>
+
+<details>
+<summary><b>Windows</b> — x64</summary>
+
+| Build | Download | Size |
+| --- | --- | --- |
+| x64 · .exe installer | [`toner-0.1.0-windows-x86_64-setup.exe`](https://github.com/stoatworks-labs/toner/releases/download/v0.1.0/toner-0.1.0-windows-x86_64-setup.exe) | 219 KB |
+| x64 · .zip archive | [`toner-windows-x86_64.zip`](https://github.com/stoatworks-labs/toner/releases/latest/download/toner-windows-x86_64.zip) | 111 KB |
+
+</details>
+
+All builds, checksums and release notes: [github.com/stoatworks-labs/toner/releases](https://github.com/stoatworks-labs/toner/releases).
+
+macOS builds are signed and notarised and open normally. The Windows builds are unsigned, so SmartScreen warns once.
+
+<!-- downloads:end -->
+
 ## The one idea
 
 A photocopier is a xerographic engine, and each stage leaves its mark: optics
