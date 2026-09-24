@@ -14,9 +14,10 @@
 > generations a line has turned by the sum of the per-generation skews; grey
 > paper comes out paper white and a grey patch lands where the tone curve
 > says — with a negative control per check that proves each can fail. It has
-> **never been loaded into Resolume**. It is loaded by
+> **never been loaded into Resolume on macOS**. There it is loaded by
 > [oxbow](https://github.com/stoatworks-labs/oxbow), which is a real FFGL host
-> and is not Resolume. See [Status](#status).
+> and is not Resolume. On Windows it has run in Resolume Arena 7.27.1, on
+> software rendering. See [Status](#status).
 
 A photocopier, and a copy of a copy of a copy, as an FFGL effect for
 [Resolume](https://resolume.com) Arena and Avenue.
@@ -119,11 +120,16 @@ floods and none blanks. Not measured.
 
 ### Not established
 
-It has **never been loaded into Resolume**, on either platform. Everything
-above was compiled, rendered and measured offline against the real plugin
-class in a headless CGL context, plus an `oxbow` load. How seventeen controls
-read in Arena's inspector is untested. Windows compiles in CI's design and
-has not been built here. No OpenFX port, not in scope for 0.1.0. No user guide yet.
+It has **never been loaded into Resolume on macOS**. Everything above was
+compiled, rendered and measured offline against the real plugin class in a
+headless CGL context, plus an `oxbow` load. On Windows, in Resolume Arena 7.27.1 (win-lab, Mesa llvmpipe, no GPU, 2026-09-24): this release's DLL loads from Extra Effects, registers as `SW Toner` / `TO01` / effect, all 23 host controls match the declaration, it renders and Arena's log stays clean: 9 of the fleet gate's 9 checks, with all 18 controls moving the picture (four under a precondition: Screen and Screen Angle in Photo Mode, Circumference with Drum Marks up, Direction with Toner Supply down). Software rendering says nothing about a GPU or about speed.
+Footage has been seen by eye only, through `--pipe`, for the project video:
+Resolume's bundled demo clips are bright shapes on black, and the copier reads
+black as toner, so at the defaults they come out as black pages with the
+shapes cut out in paper (the guide says so, and what to do for a white page).
+No OpenFX port and no presets. There is a
+[user guide](https://stoatworks-labs.com/software/toner/guide/), and the
+browser demo below.
 
 ## Browser demo
 

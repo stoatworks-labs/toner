@@ -10,8 +10,9 @@ tell anybody this works.
 
 A photocopier — and a copy of a copy of a copy — as an FFGL 2.1 effect (`TO01`,
 shown as `SW Toner`) for Resolume Arena and Avenue. C++17 + GLSL 4.10, CMake,
-universal macOS `.bundle` and a Windows `.dll`. MIT, intended home
-`github.com/stoatworks-labs/toner`.
+universal macOS `.bundle` and a Windows `.dll`. MIT; home
+`github.com/stoatworks-labs/toner`, released at v0.1.0 on 2026-09-24 with a user
+guide, a browser demo and a project video.
 
 Built 2026-09-24 in one session from the fleet's templates and `specs/SPEC-toner.md`
 (with `BRIEF.md` and `BRIEF-ADDENDUM.md`): slope (by way of clamp) for the harness,
@@ -169,6 +170,14 @@ positive field (the near kernel's along-edge factor outweighed the far one's) an
 ring of toner developed where the radial field would have cleaned. At half a pixel
 the near kernel is nearly a delta and the sign is right; `--fringe` asserts nothing
 develops two pixels outside every square's edge.
+
+### The page is opaque, and the demo clips said so
+
+The composite kept the host's alpha, and every one of Resolume's bundled demo clips
+has an alpha channel, so through `--pipe` at 1080p a page was paper and toner only
+where the clip was opaque. A copier outputs a sheet: the composite writes alpha 1,
+and Mix fades back to the source alpha included. Found by the video survey, fixed
+before the tag; no harness check reads alpha, so none noticed.
 
 ### Screen Angle's ends are the same picture
 
@@ -362,19 +371,20 @@ build, at 320×180 and 1280×720.
 
 ### Assumed, or not done
 
-- ☠️ **Never loaded into Resolume**, on either platform. Everything was compiled,
-  rendered and measured offline against the real plugin class in a headless CGL
-  context, plus an `oxbow` load.
+- ☠️ **Never loaded into Resolume on macOS.** Everything was compiled, rendered and
+  measured offline against the real plugin class in a headless CGL context, plus an
+  `oxbow` load.
+- On Windows, in Resolume Arena 7.27.1 (win-lab, Mesa llvmpipe, no GPU, 2026-09-24): this release's DLL loads from Extra Effects, registers as `SW Toner` / `TO01` / effect, all 23 host controls match the declaration, it renders and Arena's log stays clean: 9 of the fleet gate's 9 checks, with all 18 controls moving the picture (four under a precondition: Screen and Screen Angle in Photo Mode, Circumference with Drum Marks up, Direction with Toner Supply down). Software rendering says nothing about a GPU or about speed.
 - **Footage judged by eye**, not measured; eight clips, one frame each.
 - **Not verified at 4K**, only benchmarked there.
-- **Windows** has not been built; the CI workflow is adapted from slope's and has not
-  run.
+- **Windows** is built by CI (the first run failed on MSVC: `M_PI` and a variable
+  named `far`, both fixed before the tag).
 - **The fringe's off-axis shape** is not proven against the radial kernel anywhere;
   only its on-axis profile and the two-pixels-outside cleanliness are checked.
 - **No OpenFX port**, not required for 0.1.0. The browser demo's CPU half is a port
   that only a reader checks; its one measurement is the single frame above.
-- **`StoatworksAbout.h` and `ATTRIBUTIONS.md` are provisional hand copies** with
-  `guide=""`; register the project and re-run the syncs before the first release.
+- **`StoatworksAbout.h` and `ATTRIBUTIONS.md` are generated** by the backend's
+  `sync-about.py` and `sync-attributions.py`; do not hand-edit them.
 - **Nothing has been through a show.**
 
 ---
