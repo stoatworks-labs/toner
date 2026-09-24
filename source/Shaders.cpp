@@ -540,7 +540,9 @@ void main()
 	vec4 src  = texelFetch( InputTexture, p, 0 );
 	float R   = texelFetch( PageTexture, p, 0 ).r;
 	vec3 copy = Paper * R;
-	fragColor = vec4( mix( src.rgb, copy, MixAmount ), src.a );
+	// A page is opaque: a copier outputs a sheet, whatever the alpha of what was
+	// on the platen. Mix fades back to the source, alpha included.
+	fragColor = vec4( mix( src.rgb, copy, MixAmount ), mix( src.a, 1.0, MixAmount ) );
 }
 )";
 
