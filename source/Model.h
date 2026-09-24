@@ -147,19 +147,23 @@ constexpr double kThicknessPx = 0.5;
 /// kernel renormalised, so a solid wider than 33 pixels has exactly no
 /// field at points more than 16 pixels from its edge. The field shaders
 /// declare their arrays at this size.
+/// pi, spelled out: MSVC has no kPi without _USE_MATH_DEFINES, and a macro is
+/// the wrong shape for a constant anyway.
+constexpr double kPi = 3.14159265358979323846;
+
 constexpr int kKernelRadius = 16;
 
 /// One texel of the 1-D Cauchy kernel at scale `h`, the exact integral of
 /// h / ( pi ( x^2 + h^2 ) ) over texel offset j, before normalisation.
 inline double CauchyTexel( int j, double h )
 {
-	return ( std::atan( ( j + 0.5 ) / h ) - std::atan( ( j - 0.5 ) / h ) ) / M_PI;
+	return ( std::atan( ( j + 0.5 ) / h ) - std::atan( ( j - 0.5 ) / h ) ) / kPi;
 }
 
 /// The mass of the truncated kernel, which it is normalised by.
 inline double CauchyMass( double h )
 {
-	return 2.0 * std::atan( ( kKernelRadius + 0.5 ) / h ) / M_PI;
+	return 2.0 * std::atan( ( kKernelRadius + 0.5 ) / h ) / kPi;
 }
 
 /// The normalised texel: what the shader multiplies by.

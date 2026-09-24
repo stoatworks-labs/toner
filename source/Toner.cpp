@@ -296,11 +296,11 @@ FFResult Toner::ProcessOpenGL( ProcessOpenGLStruct* pGL )
 	float kernelH[ 2 * model::kKernelRadius + 1 ];
 	float kernelHH[ 2 * model::kKernelRadius + 1 ];
 	{
-		const double far = model::kGapPx + 2.0 * model::kThicknessPx;
+		const double farGap = model::kGapPx + 2.0 * model::kThicknessPx;
 		for( int j = -model::kKernelRadius; j <= model::kKernelRadius; ++j )
 		{
 			kernelH[ j + model::kKernelRadius ]  = static_cast< float >( model::KernelTexel( j, model::kGapPx ) );
-			kernelHH[ j + model::kKernelRadius ] = static_cast< float >( model::KernelTexel( j, far ) );
+			kernelHH[ j + model::kKernelRadius ] = static_cast< float >( model::KernelTexel( j, farGap ) );
 		}
 	}
 	const double gain = model::FieldGain();
@@ -322,7 +322,7 @@ FFResult Toner::ProcessOpenGL( ProcessOpenGLStruct* pGL )
 		defectSpeck[ i ]      = d.speck ? 1 : 0;
 	}
 
-	const double screenRad = screenDeg * M_PI / 180.0;
+	const double screenRad = screenDeg * model::kPi / 180.0;
 
 	//---------------------------------------------------------------------
 	// Intake: the host's picture as page 0.
@@ -349,7 +349,7 @@ FFResult Toner::ProcessOpenGL( ProcessOpenGLStruct* pGL )
 		//that is the standard rotation); the inverse map applied to output
 		//pixels is the rotation by -theta, over the zoom.
 		const int seedGen   = ( perturb & model::kPerturbSameSkew ) ? 1 : g;//Perturb 2: one skew for all (a negative control)
-		const double theta  = skewMax * model::SkewFraction( seedGen ) * M_PI / 180.0;
+		const double theta  = skewMax * model::SkewFraction( seedGen ) * model::kPi / 180.0;
 		const double dx     = offsetAmp * model::OffsetXFraction( seedGen );
 		const double dy     = offsetAmp * model::OffsetYFraction( seedGen );
 		const double c      = std::cos( theta ) / zoom;

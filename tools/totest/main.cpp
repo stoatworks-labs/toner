@@ -217,8 +217,8 @@ constexpr double kGap   = 0.5;
 constexpr double kThick = 0.5;
 double statedTexel( int j, double h )
 {
-	const double mass = 2.0 * std::atan( ( kR + 0.5 ) / h ) / M_PI;
-	return ( std::atan( ( j + 0.5 ) / h ) - std::atan( ( j - 0.5 ) / h ) ) / M_PI / mass;
+	const double mass = 2.0 * std::atan( ( kR + 0.5 ) / h ) / model::kPi;
+	return ( std::atan( ( j + 0.5 ) / h ) - std::atan( ( j - 0.5 ) / h ) ) / model::kPi / mass;
 }
 double statedGain()
 {
@@ -1258,7 +1258,7 @@ double measuredAngle( const std::vector< float >& out, int W, int H, int& span )
 	if( n < 2 )
 		return 0.0;
 	const double slope = ( n * sxy - sx * sy ) / ( n * sxx - sx * sx );
-	return -std::atan( slope ) * 180.0 / M_PI;
+	return -std::atan( slope ) * 180.0 / model::kPi;
 }
 
 int runSkew( int W, int H, int perturb, bool quiet = false )
@@ -1291,7 +1291,7 @@ int runSkew( int W, int H, int perturb, bool quiet = false )
 		//+-1/2 over `span` columns moves a least-squares slope by at most
 		//1.5 / span (the worst case is +1/2 on one half and -1/2 on the
 		//other: 0.5 ( n^2 / 4 ) / ( n^3 / 12 )), so atan( 1.5 / span ).
-		const double tol = std::atan( 1.5 / std::max( 1, span ) ) * 180.0 / M_PI;
+		const double tol = std::atan( 1.5 / std::max( 1, span ) ) * 180.0 / model::kPi;
 		failed += report( span > W / 4 && std::fabs( got - want ) <= tol, quiet, "%d generation%s: measured %+.4f deg, the sum of the skews %+.4f (tolerance %.4f over %d columns)",
 		                  n, n == 1 ? "" : "s", got, want, tol, span );
 		//Is the negative control (one skew for all) distinguishable here?
