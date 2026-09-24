@@ -123,8 +123,20 @@ It has **never been loaded into Resolume**, on either platform. Everything
 above was compiled, rendered and measured offline against the real plugin
 class in a headless CGL context, plus an `oxbow` load. How seventeen controls
 read in Arena's inspector is untested. Windows compiles in CI's design and
-has not been built here. No OpenFX port and no browser demo, neither in scope
-for 0.1.0. No user guide yet.
+has not been built here. No OpenFX port, not in scope for 0.1.0. No user guide yet.
+
+## Browser demo
+
+[toner-demo.stoatworks-labs.com](https://toner-demo.stoatworks-labs.com/) runs the
+plugin's own thirteen shaders in WebGL2 on generated clips, with every control the
+plugin declares. The shaders are copied unedited and `demo/tools/check_shaders.py`
+(run by `tools/verify.sh`) fails if a character drifts; the CPU half — the control
+laws in `Controls.cpp`, the coefficients `Toner.cpp` computes in double once a frame —
+is a hand port to JavaScript, and nothing checks a port but a reader. On the same
+960×540 colour-bars frame the page and `totest --pipe` agree to within 1/255 on every
+pixel (measured once, 2026-09-24, SwiftShader against Metal GL). The page says on its
+face what it is not. `demo/vendor/` is the shared kit from
+`stoatworks-backend/resolume-demo`; a push to main redeploys the Worker.
 
 ## Build
 
@@ -153,6 +165,7 @@ The offline harness renders the real plugin class headlessly:
 ./build/totest --offline                               # what needs no GL (CI)
 ./build/totest --bench                                 # 720p, 1080p and 4K at 1, 5 and 8 generations
 python3 tools/sweep.py                                 # no control is silently dead
+python3 demo/tools/check_shaders.py                    # the browser demo's shaders are the plugin's
 tools/verify.sh                                        # all of it, on a fresh universal build
 ```
 

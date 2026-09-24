@@ -49,6 +49,10 @@ Read `AGENTS.md` before changing the model (`Model.h`, the shaders in
 - Render cost: `./build/totest --bench` (Generations 1, 5, 8 at 720p, 1080p, 4K;
   best of three; the GPU is shared, so run it twice)
 - What a host sees: `~/Projects/resolume/oxbow/build/oxbow probe build-universal/Toner.bundle`
+- The browser demo's shaders are the plugin's, character for character: `python3 demo/tools/check_shaders.py`
+  (in verify.sh). The demo's CPU half (`demo/plugin.js`) is a hand port; only a reader checks it.
+- Deploy the demo: `cf-run npx wrangler deploy` from the repo root (a push to main also deploys it);
+  verify by content: `curl -s 'https://toner-demo.stoatworks-labs.com/?cb=1' | grep -o '<title>[^<]*'`
 
 ## Notes
 - **The shaders ARE the copier.** Each stage lives once, in GLSL (`Shaders.cpp`); the
@@ -97,7 +101,7 @@ Read `AGENTS.md` before changing the model (`Model.h`, the shaders in
   plus an `oxbow` load. Footage seen only through `--pipe` (eight of Resolume's demo
   clips), judged by eye.
 - No Windows run, no win-lab gate, no Arena gate (v0.1.0 is local).
-- No OpenFX port, no browser demo, no factory presets, no audio input.
+- No OpenFX port, no factory presets, no audio input.
 - `StoatworksAbout.h` and `ATTRIBUTIONS.md` are provisional hand copies with
   `guide=""`; the release step registers the project and re-runs the syncs.
 

@@ -91,6 +91,7 @@ stable fixed points at 0 and 1 and an unstable one at mid-grey, and:
 | `tools/check-shaders.sh` | glslc on the dumped shaders; verify.sh and CI both call it. |
 | `tools/sweep.py` | No control is silently dead. |
 | `tools/verify.sh` | All of it, at two rasters, plus the release-time checks done locally. |
+| `demo/` | The browser demo: `plugin.js` holds the plugin's fourteen shader bodies verbatim (assembled as `Shaders.cpp` assembles them) and a hand PORT of the CPU half (`Controls.cpp`, the closed forms and seeded tables of `Model.h`, the per-frame coefficients and pass order of `Toner::ProcessOpenGL`); `tools/check_shaders.py` keeps the shaders identical (verify.sh runs it); `vendor/` is the shared kit from `stoatworks-backend/resolume-demo` (never edit it, re-run `sync.sh`). Served by this repo's own Worker at `toner-demo.stoatworks-labs.com` through a DNS record + route (the zone is out of custom domains); `deploy.yml` redeploys it on a push to main. Generations is a dropdown there (the kit has no integer type). Measured once against `totest --pipe` on the same 960×540 colour-bars frame: every pixel within 1/255. |
 
 Buffers: two page buffers (R32F, ping-ponged per generation), two work buffers
 (R32F), the field's x pass (RG32F, both kernels), a 1×1 AE reading, and two L×1
@@ -370,7 +371,8 @@ build, at 320×180 and 1280×720.
   run.
 - **The fringe's off-axis shape** is not proven against the radial kernel anywhere;
   only its on-axis profile and the two-pixels-outside cleanliness are checked.
-- **No OpenFX port, no browser demo**, neither required for 0.1.0.
+- **No OpenFX port**, not required for 0.1.0. The browser demo's CPU half is a port
+  that only a reader checks; its one measurement is the single frame above.
 - **`StoatworksAbout.h` and `ATTRIBUTIONS.md` are provisional hand copies** with
   `guide=""`; register the project and re-run the syncs before the first release.
 - **Nothing has been through a show.**

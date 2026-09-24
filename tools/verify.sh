@@ -13,7 +13,9 @@
 #   shaders       does every shader compile, through a real GLSL compiler
 #                 (tools/check-shaders.sh, which CI runs too), on the exact
 #                 strings `totest --dump-shaders` writes.
-#   offline       the checks that need no GL:
+#   demo          the browser demo's copy of every shader is still the
+#                 plugin's, character for character (demo/tools/check_shaders.py).
+#   offline      the checks that need no GL:
 #                   --laws        every control law against its statement,
 #                                 and the model's own promises
 #                   --names       nothing a host will silently truncate; the
@@ -83,6 +85,24 @@ if out=$(tools/check-shaders.sh "$TOTEST" 2>&1); then
 else
 	fail "a shader does not compile"
 	printf '%s\n' "$out"
+fi
+
+#---------------------------------------------------------------------------
+# The browser demo's copy of every shader is the plugin's, character for
+# character. A drifted comment counts. It says nothing about the page's PORT
+# of the CPU half (the control laws, the coefficients, the pass order); only a
+# reader checks that.
+#---------------------------------------------------------------------------
+step "demo shaders"
+if [ -f demo/tools/check_shaders.py ]; then
+	if out=$(python3 demo/tools/check_shaders.py 2>&1); then
+		pass "$( printf '%s\n' "$out" | tail -1 )"
+	else
+		fail "the demo's shaders have drifted from source/Shaders.cpp"
+		printf '%s\n' "$out" | tail -12
+	fi
+else
+	printf '   skipped: no demo/\n'
 fi
 
 step "offline (no GL)"
