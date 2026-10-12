@@ -117,7 +117,7 @@ stable from frame to frame. Here's what falls out, none of it drawn on:
 
 ## Status
 
-**v0.1.0, local and unreleased, 2026-09-24.** Built from the fleet's templates
+**v0.1.0, released 2026-09-24.** Built from the fleet's templates
 in one session. Here's what `tools/verify.sh` shows on this Mac (Apple M4 Max, macOS 26.4),
 on a fresh universal build, at 320×180 and 1280×720:
 
@@ -157,10 +157,10 @@ and measured offline against the real plugin class in a headless CGL context, pl
 On Windows, in Resolume Arena 7.27.1 (win-lab, Mesa llvmpipe, no GPU, 2026-09-24), this
 release's DLL loads from Extra Effects and registers as `SW Toner` / `TO01` / effect, all 23
 host controls match the declaration, it renders, and Arena's log stays clean. That's 9 of
-the fleet gate's 9 checks, with all 18 controls moving the picture (four under a
-precondition: Screen and Screen Angle in Photo Mode, Circumference with Drum Marks up,
-Direction with Toner Supply down). Software rendering says nothing about a GPU or about
-speed.
+the fleet gate's 9 checks, with all 18 controls moving the picture (the plugin's 17 and
+Resolume's own Opacity), four of them under a precondition (Screen and Screen Angle in Photo
+Mode, Circumference with Drum Marks up, Direction with Toner Supply down). Software
+rendering says nothing about a GPU or about speed.
 
 Footage has only been seen by eye, through `--pipe`, for the project video. Resolume's
 bundled demo clips are bright shapes on black, and the copier reads black as toner, so at the
