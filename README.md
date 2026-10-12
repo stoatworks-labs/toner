@@ -1,43 +1,35 @@
 # toner
 
 > **AI-assisted project.** This codebase was created with [Claude](https://claude.com/claude-code)
-> (Anthropic), directed and reviewed by a human author. The copier is not
-> asserted but measured: an offline harness drives the real plugin class in a
-> headless GL context and reads each claim back out of the picture it made —
-> a grey ramp copied n times is the stated tone curve composed n times, column
-> for column, with two plateaus and a transition that narrows every copy; a
-> solid square's density profile is the strip-field closed form, and its
-> centre-to-edge ratio falls with its width while a one-pixel line prints
-> full; the drum's defects repeat exactly one circumference apart, at a
-> whole-pixel and at a fractional circumference; density down a page of
-> constant coverage follows the depletion–recovery closed form; after n
-> generations a line has turned by the sum of the per-generation skews; grey
-> paper comes out paper white and a grey patch lands where the tone curve
-> says — with a negative control per check that proves each can fail. It has
-> **never been loaded into Resolume on macOS**. There it is loaded by
-> [oxbow](https://github.com/stoatworks-labs/oxbow), which is a real FFGL host
-> and is not Resolume. On Windows it has run in Resolume Arena 7.27.1, on
-> software rendering. See [Status](#status).
+> (Anthropic), directed and reviewed by a human author. The copier is measured rather than
+> asserted: an offline harness drives the real plugin code and reads each claim back out of the
+> picture it made (the tone curve over generations, the hollow solids, the drum's repeats, the
+> toner running out, the skew and the auto-exposure), with negative controls that prove the
+> checks can fail. It has **never been loaded into Resolume on macOS**. There it's loaded by
+> [oxbow](https://github.com/stoatworks-labs/oxbow), which is a real FFGL host but isn't
+> Resolume. On Windows it has run in Resolume Arena 7.27.1, on software rendering. The numbers
+> are under [Status](#status).
 
 A photocopier, and a copy of a copy of a copy, as an FFGL effect for
-[Resolume](https://resolume.com) Arena and Avenue.
+[Resolume](https://resolume.com) Arena and Avenue. It's the look of a gig flyer that's been
+through the office copier once too often.
 
 ![The test card through four generations with the developer electrode turned down: every solid has gone hollow, a rim of toner round a paper centre, the thick rules have split into double lines, a small square has become a ring, and toner specks repeat down the page](docs/hero.png)
 
-<sub>One frame, rendered by `totest`, the offline harness — not captured from
-Resolume. Four generations, Solid Fill 0.3, Toner Supply 0.55, Drum Marks 0.6.
-Nothing here is drawn as an outline: every rim is where the fringe field of a
-charged area is strong enough to develop, and every hollow is where it is not.</sub>
+<sub>One frame, rendered by `totest`, the offline harness, rather than captured from
+Resolume. Four generations, Solid Fill 0.3, Toner Supply 0.55, Drum Marks 0.6. None of the
+outlines are drawn: every rim is where the fringe field of a charged area is strong enough
+to develop, and every hollow is where it isn't.</sub>
 
 [![Toner — a photocopier, and a copy of a copy of a copy, for Resolume](docs/video-thumb.png)](https://www.youtube.com/watch?v=-Ap1IHOWKJw)
 
-*[Watch it](https://www.youtube.com/watch?v=-Ap1IHOWKJw) — 53 seconds:
-one, three and eight generations collapsing the greys, Solid Fill hollowing every solid to a
-rim and then holding it, Toner Supply running the page out part-way and Direction turning it
-round, eight skewed and zoomed copies drifting, Photo Mode's screen beating against itself,
-drum marks repeating down the page, four paper stocks, and Contrast, Optics and Mix back to
-the clip. Rendered by the plugin's own harness over Resolume's bundled demo clips, not
-captured from Resolume.*
+*[Watch it](https://www.youtube.com/watch?v=-Ap1IHOWKJw) (53 seconds): one, three and eight
+generations collapsing the greys, Solid Fill hollowing every solid to a rim and then holding
+it, Toner Supply running the page out part-way and Direction turning it round, eight skewed
+and zoomed copies drifting, Photo Mode's screen beating against itself, drum marks repeating
+down the page, four paper stocks, and Contrast, Optics and Mix back to the clip. Rendered by
+the plugin's own harness over Resolume's bundled demo clips rather than captured from
+Resolume.*
 
 <!-- downloads:start -->
 
@@ -73,27 +65,25 @@ macOS builds are signed and notarised and open normally. The Windows builds are 
 
 ## The one idea
 
-A photocopier is a xerographic engine, and each stage leaves its mark: optics
-that blur, an auto-exposure that throws the background away, a photoconductor
-whose tone curve is steep, **development that follows the electric field
-above the latent image rather than the image itself**, and a toner supply
-that runs short. Copy the copy and the same machine runs again on its own
-output. The look of zine and punk-flyer art is the fixed point of that loop.
+A photocopier is a xerographic engine, and each stage leaves its mark: optics that blur, an
+auto-exposure that throws the background away, a photoconductor with a steep tone curve,
+development that follows the electric field above the latent image rather than the image
+itself, and a toner supply that runs short. Copy the copy and the same machine runs again on
+its own output. The look of zine and punk-flyer art is the fixed point of that loop.
 
-Toner runs N generations per frame. Each generation is the whole machine
-applied to the previous generation's page, with its own small seeded skew and
-offset, so the picture is stable from frame to frame. What falls out, none of
-it drawn:
+Toner runs N generations per frame. Each generation is the whole machine applied to the
+previous generation's page, with its own small seeded skew and offset, so the picture stays
+stable from frame to frame. Here's what falls out, none of it drawn on:
 
-- **Tones collapse to black and white.** One generation is an S-curve with
-  stable fixed points at paper and at toner and an unstable one at mid-grey;
-  composed, it drives every grey to one or the other, faster each copy.
+- **Tones collapse to black and white.** One generation is an S-curve with stable fixed
+  points at paper and at toner and an unstable one at mid-grey. Composed, it drives every
+  grey to one or the other, faster with each copy.
 - **Solids go hollow.** The field above a wide charged area is zero at its
   centre (all its flux goes down to the grounded photoconductor) and peaks
   near its edges, so big solids develop as rims round pale centres while a
   thin line's field is its whole width and prints full. `Solid Fill` blends
-  in a developer electrode, which flattens the field toward the
-  parallel-plate value — exactly what better machines added.
+  in a developer electrode (what the better machines added), which flattens
+  the field towards the parallel-plate value.
 - **Toner starvation.** The developer's concentration falls with the coverage
   it has laid down along the process direction and recovers at a stated rate,
   so density fades down a heavy page and comes back on a light one. Through
@@ -128,8 +118,8 @@ it drawn:
 ## Status
 
 **v0.1.0, local and unreleased, 2026-09-24.** Built from the fleet's templates
-in one session. What `tools/verify.sh` establishes on this Mac (Apple M4 Max,
-macOS 26.4), on a fresh universal build, at **320×180 and 1280×720**:
+in one session. Here's what `tools/verify.sh` shows on this Mac (Apple M4 Max, macOS 26.4),
+on a fresh universal build, at 320×180 and 1280×720:
 
 | check | what it establishes |
 | --- | --- |
@@ -149,42 +139,48 @@ macOS 26.4), on a fresh universal build, at **320×180 and 1280×720**:
 Render cost, best of three runs of 60 frames after a warm-up, `glFinish` both
 sides, on a GPU shared with other builds, at Generations 1 / 5 / 8:
 **0.8 / 4.0 / 6.3 ms** at 720p, **1.4 / 6.5 / 10.2 ms** at 1080p,
-**4.6 / 21 / 34 ms** at 4K. So the cap of 8 generations keeps 1080p inside a
-60 fps frame (62% of it); at 4K five do not, and three should by interpolation
-(about 13 ms) but were not timed.
-Each generation is eleven passes, and the two 33-tap field passes are most of
-the cost. macOS figures only.
+**4.6 / 21 / 34 ms** at 4K. So the cap of 8 generations keeps 1080p inside a 60 fps frame
+(62% of it). At 4K five don't, and three should by interpolation (about 13 ms) but weren't
+timed. Each generation is eleven passes, and the two 33-tap field passes are most of the
+cost. These are macOS figures only.
 
-Seen on footage: eight of Resolume's bundled demo clips through `--pipe` at
-the defaults, judged by eye — dark clips come out as black pages with the
-bright shapes cut out in paper, lit scenes as line-and-solid drawings; none
-floods and none blanks. Not measured.
+On footage: eight of Resolume's bundled demo clips through `--pipe` at the defaults, judged
+by eye. Dark clips come out as black pages with the bright shapes cut out in paper, and lit
+scenes as line-and-solid drawings; none floods and none blanks. That part isn't measured.
 
 ### Not established
 
-It has **never been loaded into Resolume on macOS**. Everything above was
-compiled, rendered and measured offline against the real plugin class in a
-headless CGL context, plus an `oxbow` load. On Windows, in Resolume Arena 7.27.1 (win-lab, Mesa llvmpipe, no GPU, 2026-09-24): this release's DLL loads from Extra Effects, registers as `SW Toner` / `TO01` / effect, all 23 host controls match the declaration, it renders and Arena's log stays clean: 9 of the fleet gate's 9 checks, with all 18 controls moving the picture (four under a precondition: Screen and Screen Angle in Photo Mode, Circumference with Drum Marks up, Direction with Toner Supply down). Software rendering says nothing about a GPU or about speed.
-Footage has been seen by eye only, through `--pipe`, for the project video:
-Resolume's bundled demo clips are bright shapes on black, and the copier reads
-black as toner, so at the defaults they come out as black pages with the
-shapes cut out in paper (the guide says so, and what to do for a white page).
-No OpenFX port and no presets. There is a
-[user guide](https://stoatworks-labs.com/software/toner/guide/), and the
-browser demo below.
+It has **never been loaded into Resolume on macOS**. Everything above was compiled, rendered
+and measured offline against the real plugin class in a headless CGL context, plus an
+`oxbow` load.
+
+On Windows, in Resolume Arena 7.27.1 (win-lab, Mesa llvmpipe, no GPU, 2026-09-24), this
+release's DLL loads from Extra Effects and registers as `SW Toner` / `TO01` / effect, all 23
+host controls match the declaration, it renders, and Arena's log stays clean. That's 9 of
+the fleet gate's 9 checks, with all 18 controls moving the picture (four under a
+precondition: Screen and Screen Angle in Photo Mode, Circumference with Drum Marks up,
+Direction with Toner Supply down). Software rendering says nothing about a GPU or about
+speed.
+
+Footage has only been seen by eye, through `--pipe`, for the project video. Resolume's
+bundled demo clips are bright shapes on black, and the copier reads black as toner, so at the
+defaults they come out as black pages with the shapes cut out in paper (the guide says so,
+and what to do for a white page). There's no OpenFX port and there are no presets. There is
+a [user guide](https://stoatworks-labs.com/software/toner/guide/), and the browser demo
+below.
 
 ## Browser demo
 
-[toner-demo.stoatworks-labs.com](https://toner-demo.stoatworks-labs.com/) runs the
-plugin's own thirteen shaders in WebGL2 on generated clips, with every control the
-plugin declares. The shaders are copied unedited and `demo/tools/check_shaders.py`
-(run by `tools/verify.sh`) fails if a character drifts; the CPU half — the control
-laws in `Controls.cpp`, the coefficients `Toner.cpp` computes in double once a frame —
-is a hand port to JavaScript, and nothing checks a port but a reader. On the same
-960×540 colour-bars frame the page and `totest --pipe` agree to within 1/255 on every
-pixel (measured once, 2026-09-24, SwiftShader against Metal GL). The page says on its
-face what it is not. `demo/vendor/` is the shared kit from
-`stoatworks-backend/resolume-demo`; a push to main redeploys the Worker.
+[toner-demo.stoatworks-labs.com](https://toner-demo.stoatworks-labs.com/) runs the plugin's
+own thirteen shaders in WebGL2 on generated clips, with every control the plugin declares.
+The shaders are copied unedited and `demo/tools/check_shaders.py` (run by `tools/verify.sh`)
+fails if a character drifts. The CPU half (the control laws in `Controls.cpp`, and the
+coefficients `Toner.cpp` computes in double once a frame) is a hand port to JavaScript, and
+nothing checks a port except a person reading it. On the same 960×540 colour-bars frame, the
+page and `totest --pipe` agree to within 1/255 on every pixel (measured once, 2026-09-24,
+SwiftShader against Metal GL). The page tells you up front what it isn't. `demo/vendor/` is
+the shared kit from `stoatworks-backend/resolume-demo`, and a push to main redeploys the
+Worker.
 
 ## Build
 
@@ -203,7 +199,7 @@ macOS builds are universal (Apple Silicon + Intel) by default; add
 
 ## Building and testing
 
-The offline harness renders the real plugin class headlessly:
+The offline harness renders the real plugin class headless:
 
 ```bash
 ./build/totest --out /tmp/frame.png --size 1920x1080   # the moving card
@@ -226,8 +222,8 @@ ffmpeg -i in.mov -f rawvideo -pix_fmt rgba - \
   | ffmpeg -f rawvideo -pix_fmt rgba -s 1920x1080 -r 50 -i - out.mov
 ```
 
-See [`CLAUDE.md`](CLAUDE.md) for the full command reference and
-[`AGENTS.md`](AGENTS.md) for the model and the traps.
+[`CLAUDE.md`](CLAUDE.md) has the full command reference, and [`AGENTS.md`](AGENTS.md) the
+model and the traps.
 
 <!-- attributions:start -->
 This project is built on other people's work — see [ATTRIBUTIONS.md](ATTRIBUTIONS.md).
