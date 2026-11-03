@@ -8,16 +8,44 @@
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="./vendor/kit.css" />
     <link rel="canonical" href="https://toner-demo.stoatworks-labs.com/" />
+    <meta name="project-page" content="https://stoatworks-labs.com/software/toner/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Stoatworks Labs" />
+    <meta property="og:title" content="Toner — browser demo | Stoatworks Labs" />
+    <meta property="og:description" content="Try the Toner FFGL plugin for Resolume in your browser: a photocopier, and a copy of a copy of a copy. The plugin's own twelve shader passes ported to WebGL2, with its control laws and its per-frame coefficients — the field kernels, the development window, the seeded skews and drum marks — ported to JavaScript." />
+    <meta property="og:url" content="https://toner-demo.stoatworks-labs.com/" />
+    <meta property="og:image" content="https://stoatworks-labs.com/thumbs/toner.png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
+    <meta property="og:image:alt" content="Toner" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <main id="demo">
       <noscript>
+        <h1>Toner</h1>
+        <p>
+          An FFGL effect that runs your clip through a xerographic engine up to
+          eight times a frame, each copy made from the last: optics, an
+          auto-exposure that throws the background away, a steep photoconductor,
+          development that follows the electric field above the latent image
+          rather than the image itself, a toner supply that runs short, and a
+          drum whose defects repeat down the page. Greys collapse to paper or
+          toner, wide solids go hollow while thin lines print full, the page
+          runs out part-way down, and the skew drifts a bit further with every
+          generation. Much like the office copier, minus the paper jams.
+        </p>
         <p>
           This demo runs the plugin's shaders in your browser, so it needs
           JavaScript and WebGL2. The plugin itself, its source and its downloads
           are on
           <a href="https://github.com/stoatworks-labs/toner">its repository</a>.
         </p>
+        <ul>
+          <li><a href="https://stoatworks-labs.com/software/toner/">Project page and downloads</a></li>
+          <li><a href="https://stoatworks-labs.com/software/toner/guide/">User guide</a></li>
+          <li><a href="https://github.com/stoatworks-labs/toner">Source on GitHub</a></li>
+        </ul>
       </noscript>
     </main>
 
